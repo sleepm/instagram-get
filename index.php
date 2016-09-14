@@ -18,6 +18,10 @@ $html = <<<'HTML'
 		var get = document.getElementById('get');
 		get.onclick = function(){
 			var src = document.getElementById('src').value;
+			var input = document.getElementById('src');
+			input.onfocus = function(){
+				this.value='';
+			}
 			if(src.match("https://www.instagram.com/p/")){
 				src = src.split('/');
 				src = src.pop()==""?src.pop():null;
