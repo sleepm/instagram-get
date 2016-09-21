@@ -8,20 +8,23 @@ $html = <<<'HTML'
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<style>
 		body{margin:0 auto;max-width: 640px;}
+		div{margin: 10px 0 10px;display:flex;justify-content:center;align-items:center;}
 		a{text-decoration: none;}
 	</style>
 </head>
 <body>
-	<input type="url" name="src" id="src">
-	<input type="submit" value="Get it!" id="get">
+	<div>
+		<input type="url" name="src" id="src">
+		<input type="submit" value="Get it!" id="get">
+	</div>
 	<script>
 		var get = document.getElementById('get');
+		var input = document.getElementById('src');
+		input.onfocus = function(){
+			this.value='';
+		}
 		get.onclick = function(){
 			var src = document.getElementById('src').value;
-			var input = document.getElementById('src');
-			input.onfocus = function(){
-				this.value='';
-			}
 			if(src.match("https://www.instagram.com/p/")){
 				src = src.split('/');
 				src = src.pop()==""?src.pop():null;
@@ -32,7 +35,6 @@ $html = <<<'HTML'
 				error();
 			}
 		}
-		//var ajax = new XDomainRequest() | new XMLHttpRequest();
 		function getJson(src){
 			var ajax = new XMLHttpRequest();
 			ajax.open('GET', '?src='+src);
